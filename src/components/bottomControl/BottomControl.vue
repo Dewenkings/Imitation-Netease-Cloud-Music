@@ -102,8 +102,8 @@
         <div v-html="recondInfo" slot="content"></div>
         <el-link
           type="info"
-          href="#"
-          target="_self"
+          href="https://github.com/Dewenkings/Imitation-Netease-Cloud-Music"
+          target="_blank"
           class="recondInfo"
           >仿网易云音乐</el-link
         >
@@ -165,7 +165,9 @@ export default {
       // 用户是否喜欢当前音乐
       isUserLikeCurrentMusic: false,
       recondInfo: `<div style='text-align:center;font-size:12px;'>
-      本站为仿网易云音乐展示项目, 仅供学习使用, 侵权必删!</div>`,
+      本站为仿网易云音乐展示项目, 仅供学习使用, 侵权必删!
+      <p>点击跳转至github仓库</p>
+      </div>`,
       // 播放模式（顺序播放，随机播放）
       // order random
       playType: 'order'
