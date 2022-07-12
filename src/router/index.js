@@ -11,34 +11,34 @@ VueRouter.prototype.push = function push (location) {
 }
 
 // 首页-发现音乐
-const Recommend = () => import('../views/discover/discoverChildren/Recommend.vue')
-const MusicList = () => import('views/discover/discoverChildren/MusicList.vue')
-const MusicListIndex = () => import('views/discover/discoverChildren/musicListChildren/MusicListIndex.vue')
-const MusicListHighquality = () => import('views/discover/discoverChildren/musicListChildren/MusicListHighquality.vue')
-const Singer = () => import('../views/discover/discoverChildren/Singer.vue')
-const Ranking = () => import('../views/discover/discoverChildren/Ranking.vue')
+const Recommend = () => import(/* webpackChunkName: "discover_recommend_musiclist" */ '../views/discover/discoverChildren/Recommend.vue')
+const MusicList = () => import(/* webpackChunkName: "discover_recommend_musiclist" */ 'views/discover/discoverChildren/MusicList.vue')
+const MusicListIndex = () => import(/* webpackChunkName: "discover_recommend_musiclist" */ 'views/discover/discoverChildren/musicListChildren/MusicListIndex.vue')
+const MusicListHighquality = () => import(/* webpackChunkName: "discover_recommend_musiclist" */ 'views/discover/discoverChildren/musicListChildren/MusicListHighquality.vue')
+const Singer = () => import(/* webpackChunkName: "discover_singer_ranking" */ '../views/discover/discoverChildren/Singer.vue')
+const Ranking = () => import(/* webpackChunkName: "discover_singer_ranking" */ '../views/discover/discoverChildren/Ranking.vue')
 // 首页-视频
-const Video = () => import('views/video/Video.vue')
-const VideoList = () => import('views/video/videoChildren/VideoList.vue')
-const MvList = () => import('views/video/videoChildren/MvList.vue')
+const Video = () => import(/* webpackChunkName: "video_video_mv" */ 'views/video/Video.vue')
+const VideoList = () => import(/* webpackChunkName: "video_video_mv" */ 'views/video/videoChildren/VideoList.vue')
+const MvList = () => import(/* webpackChunkName: "video_video_mv" */ 'views/video/videoChildren/MvList.vue')
 // 首页-收藏
-const Favorites = () => import('views/favorites/favorites.vue')
-const FavoriteAlbum = () => import('views/favorites/favoritesChildren/FavoriteAlbum.vue')
-const FavoriteVideo = () => import('views/favorites/favoritesChildren/FavoriteVideo.vue')
-const FavoriteSinger = () => import('views/favorites/favoritesChildren/FavoriteSinger.vue')
+const Favorites = () => import(/* webpackChunkName: "favorites_album_video_singer" */ 'views/favorites/favorites.vue')
+const FavoriteAlbum = () => import(/* webpackChunkName: "favorites_album_video_singer" */ 'views/favorites/favoritesChildren/FavoriteAlbum.vue')
+const FavoriteVideo = () => import(/* webpackChunkName: "favorites_album_video_singer" */ 'views/favorites/favoritesChildren/FavoriteVideo.vue')
+const FavoriteSinger = () => import(/* webpackChunkName: "favorites_album_video_singer" */ 'views/favorites/favoritesChildren/FavoriteSinger.vue')
 // 首页-每日推荐
 const RecommendMusic = () => import('views/recommendMusic/RecommendMusic.vue')
 // 个人用户主页
-const Personal = () => import('../views/personal/Personal.vue')
-const Follows = () => import('../views/personal/personalChildren/Follows.vue')
-const Followeds = () => import('../views/personal/personalChildren/Followeds.vue')
+const Personal = () => import(/* webpackChunkName: "personal_follows_followeds" */ '../views/personal/Personal.vue')
+const Follows = () => import(/* webpackChunkName: "personal_follows_followeds" */ '../views/personal/personalChildren/Follows.vue')
+const Followeds = () => import(/* webpackChunkName: "personal_follows_followeds" */ '../views/personal/personalChildren/Followeds.vue')
 // 搜索框
-const Search = () => import('../views/search/Search.vue')
-const SearchSong = () => import('../views/search/searchChildren/SearchSong.vue')
-const SearchSinger = () => import('../views/search/searchChildren/SearchSinger.vue')
-const SearchAlbum = () => import('../views/search/searchChildren/SearchAlbum.vue')
-const SearchVideo = () => import('../views/search/searchChildren/SearchVideo.vue')
-const SearchMusicList = () => import('../views/search/searchChildren/SearchMusicList.vue')
+const Search = () => import(/* webpackChunkName: "search_song_singer_album_video_musicList" */ '../views/search/Search.vue')
+const SearchSong = () => import(/* webpackChunkName: "search_song_singer_album_video_musicList" */ '../views/search/searchChildren/SearchSong.vue')
+const SearchSinger = () => import(/* webpackChunkName: "search_song_singer_album_video_musicList" */ '../views/search/searchChildren/SearchSinger.vue')
+const SearchAlbum = () => import(/* webpackChunkName: "search_song_singer_album_video_musicList" */ '../views/search/searchChildren/SearchAlbum.vue')
+const SearchVideo = () => import(/* webpackChunkName: "search_song_singer_album_video_musicList" */ '../views/search/searchChildren/SearchVideo.vue')
+const SearchMusicList = () => import(/* webpackChunkName: "search_song_singer_album_video_musicList" */ '../views/search/searchChildren/SearchMusicList.vue')
 
 // 歌手详情
 const SingerDetail = () => import('../views/singerDetail/SingerDetail.vue')
