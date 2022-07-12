@@ -1,6 +1,6 @@
 <template>
   <div class="FavoriteAlbumContainer">
-    <div class="FavoriteAlbum" v-if="count != 0">
+    <div class="FavoriteAlbum">
       <div v-if="count != 0">
         <div class="title">收藏的专辑({{ count }})</div>
         <list-card

@@ -6,7 +6,8 @@
         点击专辑页面跳转专辑详情页面中 -->
       <img :src="officialListDetailItem.coverImgUrl || cover"
         alt=""
-        @click="clickCheckAll(officialListDetailItem.id)"
+        @click=" officialListDetailItem.songs.length
+        ? clickCheckAll(officialListDetailItem.songs.id) : ''"
         >
     </div>
     <!-- 专辑歌曲列表的展示 -->
@@ -20,6 +21,7 @@
               (officialListDetailItem.isOpen
                 ? officialListDetailItem.topSongs
                 : officialListDetailItem.topSongs.slice(0, 10))) || officialListDetailItem.songs.slice(0, 10)" :key="index"
+                @click="handleRowClick"
               @dblclick="handleRowDbClick(officialListDetailItem.id || item.id, index)"
             >
           <td class="index">{{ index + 1 }}</td>
@@ -77,6 +79,17 @@ export default {
     return {}
   },
   methods: {
+    // 点击行的回调 （选中）
+    handleRowClick (event) {
+      // 点击时，事件对象可能是td或tr，这里做下判断
+      let path
+      if (event.path[0].localName === 'tr') {
+        path = event.path[0]
+      } else {
+        path = event.path[1]
+      }
+      this.$emit('handleRowClick', path)
+    },
     // 双击播放歌曲
     handleRowDbClick (id, index) {
       const listId = this.listId

@@ -1,7 +1,7 @@
 <template>
   <div class="FavoriteVideoContainer">
-    <div class="FavoriteVideo" v-if="count != 0">
-      <div v-if="count != 0">
+    <div class="FavoriteVideo">
+      <div v-if="favoriteMvList.length != 0">
         <div class="title">收藏的视频和MV</div>
         <video-list-card
         :videoList="favoriteMvList"
@@ -23,7 +23,7 @@ export default {
   name: 'favoriteVideo',
   data () {
     return {
-      favoriteMvList: {},
+      favoriteMvList: [],
       hasMore: false,
       currentPage: 1
     }
@@ -37,8 +37,9 @@ export default {
         timestamp
       })
       console.log(res)
-      this.favoriteMvList = res.data.data
-      // this.favoriteMvList.push(...res.data.data)
+      // this.favoriteMvList = res.data.data
+      // 需要的是数组形式
+      this.favoriteMvList.push(...res.data.data)
     },
     clickMvItem ({ id, index }) {
       if (this.favoriteMvList[index].type === 0) {

@@ -67,6 +67,8 @@
             >
               <list-table
                 :officialListDetailItem="item.songsObj"
+                @handleRowClick="handleRowClick"
+                @handleRowDbClick="handleRowDbClick"
                 @clickCheckAll="clickListCardItem"
                 :cover="item.album.blurPicUrl + '?param=300y300'"
                 :listId="item.album.id.toString()"
@@ -175,7 +177,7 @@ export default {
         limit: 20 * this.videoPage
         // offset: (this.videoPage - 1) * 20
       })
-      console.log('请求歌手MV列表：', res)
+      // console.log('请求歌手MV列表：', res)
       this.singerMvInfo = res.data
     },
     // 请求歌手专辑列表
@@ -196,7 +198,7 @@ export default {
     async getAlbumDetail (id) {
       let res = await this.$request('/album', { id })
       res = res.data
-      console.log(res)
+      // console.log(res)
       const songs = res.songs
       // 处理歌曲中的时间
       songs.forEach((item, index) => {
@@ -205,31 +207,33 @@ export default {
       // 把一个专辑中所有歌曲内容存储在一个对象中,子组件设置了对象属性要求
       res.songsObj = { songs }
       this.singerAlbum.push(res)
-      console.log('歌手专辑', this.singerAlbum)
+      // console.log('歌手专辑', this.singerAlbum)
     },
     // 事件函数
     // 行双击事件的回调
     // 这里的 id是歌曲id   index 双击歌曲在歌单(专辑）中的索引   listId是（专辑）歌单id
     handleRowDbClick ({ id, index, listId }) {
-      console.log('id', id)
-      console.log('index', index)
-      console.log('listId', listId)
+      // console.log('id', id)
+      // console.log('index', index)
+      // console.log('listId', listId)
       this.isDbc = true
       this.handleViewDOM(id, listId, index)
-
-      // 播放的逻辑操作
-      if (listId !== this.$route.params.id) {
+      // 播放的逻辑操作;
+      if (listId.toString() !== this.$route.params.id.toString()) {
+        // console.log('歌单发生了变化')
         const musicListIndex = this.singerAlbum.findIndex(
-          (item) => item.album.id === listId
+          (item) => item.album.id.toString() === listId.toString()
         )
-        // console.log(musicListIndex);
+        // 又是类型原因
         this.$store.commit('updateMusicId', id)
         // 如果歌单发生变化,则提交歌单到vuex
-        if (listId !== this.$store.state.musicListId) {
+        if (parseInt(listId) !== this.$store.state.musicListId) {
           // 将歌单传到vuex
+          console.log('歌单变化')
+          console.log('typeof this.singerAlbum[musicListIndex].songs', typeof this.singerAlbum[musicListIndex].songs)
           this.$store.commit('updateMusicList', {
             musicList: this.singerAlbum[musicListIndex].songs,
-            musicListId: listId
+            musicListId: parseInt(listId)
           })
         }
       } else {
@@ -285,7 +289,7 @@ export default {
       }
     },
     // 点击热门歌曲某行
-    handleRowClick () {
+    handleRowClick (event) {
       if (document.querySelector('.selectRow')) {
         document.querySelector('.selectRow').classList.remove('selectRow')
       }
@@ -311,6 +315,7 @@ export default {
       this.$router.push({ name: 'singerDetail', params: { id } })
     },
     handleViewDOM (id, listId, index) {
+      // 当前指定专辑的index,专辑id
       // console.log('currentRowInfo', currentRowInfo)
       // 先清空之前的样式
       if (currentRowInfo.listId) {
@@ -322,11 +327,11 @@ export default {
       // 根据listId找歌单索引 listIndex
       let listIndex = -1
       // top50的情况
-      if (listId === this.$route.params.id) {
+      if (parseInt(listId) === parseInt(this.$route.params.id)) {
         listIndex = 0
       } else {
         listIndex = this.singerAlbum.findIndex(
-          (item) => item.album.id === listId
+          (item) => item.album.id === parseInt(listId)
         )
         console.log('listIndex', listIndex)
         // 如果没有，说明目前还没有渲染或者还没有请求
@@ -336,7 +341,7 @@ export default {
         }
         listIndex += 1
       }
-
+      // console.log('listIndex', listIndex)
       // 找歌曲在歌单中的索引 i
       if (index === undefined) {
         // 分top50和专辑两种情况
@@ -351,8 +356,8 @@ export default {
         i = index
       }
 
-      console.log(i, 'i')
-      console.log(index, 'index')
+      // console.log(i, 'i')
+      // console.log(index, 'index')
       // 渲染
       if (tables[listIndex] && tables[listIndex].children[i]) {
         const currentRow = tables[listIndex].children[i]
@@ -364,8 +369,8 @@ export default {
         // 保存当前数据 供下次清空样式使用
         currentRowInfo.i = i
         // 因为歌单的顺序可能会改变，所以不要直接保存索引
-        currentRowInfo.listId = listId
-        currentRowInfo.singerId = this.$route.params.id
+        currentRowInfo.listId = listId.toString()
+        currentRowInfo.singerId = this.$route.params.id.toString()
         // 将currentRowInfo上传至vuex 供下次重新进入页面使用
         this.$store.commit('updateCurrentRowInfo', currentRowInfo)
       }
@@ -374,11 +379,12 @@ export default {
       const tables = document.querySelectorAll('table')
       // 找到歌单的索引
       let listIndex = -1
-      if (listId === this.$route.params.id) {
+      // 类型判断
+      if (listId.toString() === this.$route.params.id.toString()) {
         listIndex = 0
       } else { // 专辑的情况
         listIndex = this.singerAlbum.findIndex(
-          (item) => item.album.id === listId
+          (item) => item.album.id.toString() === listId.toString()
         )
         // 如果没有，说明目前还没有渲染或者还没有请求
         if (listIndex === -1) {
@@ -387,9 +393,9 @@ export default {
         }
         listIndex += 1
       }
-      // console.log("执行了清空");
-      // console.log("listIndex:", listIndex);
-      // console.log("i:", i);
+      // console.log('执行了清空')
+      // console.log('listIndex:', listIndex)
+      // console.log('i:', i)
       if (tables[listIndex] && tables[listIndex].children[i]) {
         const lastRow = tables[listIndex].children[i]
         lastRow.querySelector('.index').innerHTML = i + 1
@@ -437,6 +443,14 @@ export default {
     await this.getAlbumInfo()
     await this.getSimiArtistInfo()
     await this.getSingerMv()
+    this.$nextTick(() => {
+      if (this.$store.state.currentRowInfo.singerId === this.$route.params.id) {
+        this.handleViewDOM(
+          this.$store.state.musicId,
+          this.$store.state.musicListId
+        )
+      }
+    })
   },
   watch: {
     singerAlbum () {
@@ -445,6 +459,17 @@ export default {
       } else {
         this.disabled = true
       }
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        if (
+          this.$store.state.currentRowInfo.singerId === this.$route.params.id
+        ) {
+          this.handleViewDOM(
+            this.$store.state.musicId,
+            this.$store.state.musicListId
+          )
+        }
+      }, 500)
     },
     // 音乐加载完成后重置isDbc
     '$store.state.isMusicLoad' (isMusicLoad) {
@@ -463,7 +488,6 @@ export default {
         )
       }
     },
-
     // 监听singerAlbum的变化
     // eslint-disable-next-line no-dupe-keys
     singerAlbum () {

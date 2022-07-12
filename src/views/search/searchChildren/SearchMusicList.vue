@@ -56,7 +56,7 @@ export default {
       this.getSearchMusicList()
     },
     // 点击卡片的回调
-    // 跳转至musiclistDetail页面 --- 另一个页面 -- to do
+    // 跳转至musiclistDetail页面
     clickListCardItem (id) {
       this.$router.push({ name: 'musicListDetail', params: { id } })
     }

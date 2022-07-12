@@ -251,7 +251,7 @@ export default {
       const index = this.musicList.findIndex(
         (item) => item.id === this.$store.state.musicId
       )
-      console.log(index)
+
       if (index !== -1) {
         // 记录当前音乐的index
         this.currentMusicIndex = index

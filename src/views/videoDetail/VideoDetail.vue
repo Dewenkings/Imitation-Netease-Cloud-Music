@@ -293,7 +293,49 @@ export default {
             item.mlogBaseData.dration === this.videoInfo.durationms
         )
       }
+    },
+    // 用户点击了点赞按钮的回调
+    async likeVideo () {
+      this.isLike = !this.isLike
+      var timestamp = Date.parse(new Date())
+      const type = this.$route.params.type === 'mv' ? 1 : 5
+      // 请求
+      const res = await this.$request('/resource/like', {
+        type,
+        id: this.$route.params.id,
+        t: this.isLike ? 1 : 0,
+        timestamp
+      })
+      console.log(res)
+      this.getLikeVideoList()
+    },
+    // 请求用户喜欢的视频列表
+    async getLikeVideoList () {
+      const timestamp = Date.parse(new Date())
+      const res = await this.$request('/playlist/mylike', {
+        limit: 1000,
+        timestamp
+      })
+      console.log(res)
+      if (res.data.code !== 200) {
+        this.$message.error('获取用户点赞视频失败,请稍后重试!')
+        return
+      }
+      this.$store.commit('updateLikeVideoList', res.data.data.feeds)
+      console.log('请求了用户喜欢的视频列表')
+    },
+    // 请求用户收藏的视频列表
+    async getSubVideoList () {
+      const timestamp = Date.parse(new Date())
+      const res = await this.$request('/mv/sublist', { limit: 1000, timestamp })
+      if (res.data.code !== 200) {
+        this.$message.error('获取用户收藏视频失败,请稍后重试!')
+        return
+      }
+      this.$store.commit('updateSubVideoList', res.data.data)
+      console.log('请求了用户收藏的视频列表')
     }
+
   },
   async created () {
     // 获取相关推荐

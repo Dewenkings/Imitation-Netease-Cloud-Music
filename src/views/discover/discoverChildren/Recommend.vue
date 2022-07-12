@@ -52,6 +52,7 @@ export default {
       // 专辑
       const type = item.targetType
       const id = item.targetId
+      console.log('type', typeof id)
       console.log(type, id)
       if (type === 10) {
         console.log('album')
@@ -65,7 +66,7 @@ export default {
       } else if (type === 1) {
         console.log('song') // 单曲
         // 可以播放，当时存在底部播放按钮左侧没有变化
-        this.$store.commit('updateMusicId', id)
+        this.$store.commit('updateMusicId', id.toString())
         // const musicList = this.$store.state.musicList
         // const currentIndex = this.$store.state.currentIndex
         // // 先判断该歌曲是否已经在歌单中存在，避免重复点击导致歌单出现相同歌曲

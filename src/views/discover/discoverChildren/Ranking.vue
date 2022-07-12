@@ -9,7 +9,6 @@
           :officialListDetailItem="item"
           v-for="(item, index) in officialListDetail"
           :key="index"
-          @handleRowClick="handleRowClick"
           @handleRowDbClick="handleRowDbClick"
           @clickCheckAll="clickListCardItem"
         ></list-table>
