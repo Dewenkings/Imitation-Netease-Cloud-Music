@@ -1,3 +1,28 @@
+const isProd = process.env.NODE_ENV === 'production'
+let externals = {}
+let cdn = { css: [], js: [] }
+
+if (isProd) {
+  externals = {
+    vue: 'Vue',
+    'vue-router': 'VueRouter',
+    vuex: 'Vuex',
+    axios: 'axios',
+    'element-ui': 'ELEMENT'
+  }
+
+  cdn = {
+    css: ['https://unpkg.com/element-ui/lib/theme-chalk/index.css'],
+    js: [
+      'https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js',
+      'https://unpkg.com/vue-router@3.2.0/dist/vue-router.js',
+      'https://unpkg.com/vuex@3.4.0',
+      'https://cdn.staticfile.org/axios/0.21.1/axios.min.js',
+      'https://unpkg.com/element-ui/lib/index.js'
+    ]
+  }
+}
+
 module.exports = {
   configureWebpack: {
     resolve: {
@@ -9,30 +34,14 @@ module.exports = {
         views: '@/views',
         plugins: '@/plugins'
       }
-    }
+    },
+    externals: externals
   },
-  // 自定义打包入口
+  // 自定义打包
   chainWebpack: config => {
     // 发布模式
-    config.when(process.env.NODE_ENV === 'production', config => {
-      config.entry('app').clear().add('./src/main-prod.js')
-      config.set('externals', {
-        vue: 'Vue',
-        'vue-router': 'VueRouter',
-        axios: 'axios',
-        'element-ui': 'ELEMENT'
-      })
-      config.plugin('html').tap(args => {
-        args[0].isProd = true
-        return args
-      })
-    })
-    // 开发模式
-    config.when(process.env.NODE_ENV === 'development', config => {
-      config.entry('app').clear().add('./src/main-dev.js')
-    })
     config.plugin('html').tap(args => {
-      args[0].isProd = false
+      args[0].cdn = cdn
       return args
     })
   },

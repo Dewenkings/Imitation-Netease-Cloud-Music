@@ -7,13 +7,13 @@ module.exports = {
     '@vue/cli-plugin-babel/preset'
   ],
   plugins: [
-    [
-      'component',
-      {
-        libraryName: 'element-ui',
-        styleLibraryName: 'theme-chalk'
-      }
-    ],
+    // [
+    //   'component',
+    //   {
+    //     libraryName: 'element-ui',
+    //     styleLibraryName: 'theme-chalk'
+    //   }
+    // ],
     // 发布产品时候的插件数组
     ...prodPlugins,
     'syntax-dynamic-import'

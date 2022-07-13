@@ -7,19 +7,10 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.isProd ? '' : 'dev - ' %>仿网易云音乐</title>
 
-    <% if(htmlWebpackPlugin.options.isProd) { %>
+    <% for(var css of htmlWebpackPlugin.options.cdn.css) { %>
+      <link rel="stylesheet" href="<%=css%>">
+      <% } %>
 
-    <script src="https://cdn.staticfile.org/vue/2.6.11/vue.min.js"></script>
-    <script src="https://cdn.bootcss.com/vuex/3.4.0/vuex.min.js"></script>
-    <script src="https://cdn.staticfile.org/axios/0.21.1/axios.min.js"></script>
-
-    <!-- <script src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js"></script> -->
-    <!-- element-ui的js文件 -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-
-    <% } %>
-    
   </head>
   <body>
     <noscript>
@@ -27,5 +18,11 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+     <!-- 引入CDN的脚本---js -->
+     <% for(var js of htmlWebpackPlugin.options.cdn.js) { %>
+      <script src="<%=js%>"></script>
+      <% } %>
+
   </body>
 </html>
