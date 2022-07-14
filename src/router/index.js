@@ -5,10 +5,10 @@ import VueRouter from 'vue-router'
 import Index from '../components/Index.vue'
 const Discover = () => import('views/discover/Discover.vue')
 // 对于原始路径重复点击出现的问题
-const originalPush = VueRouter.prototype.push
-VueRouter.prototype.push = function push (location) {
-  return originalPush.call(this, location).catch(err => err)
-}
+// const originalPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push (location) {
+//   return originalPush.call(this, location).catch(err => err)
+// }
 
 // 首页-发现音乐
 const Recommend = () => import(/* webpackChunkName: "discover_recommend_musiclist" */ '../views/discover/discoverChildren/Recommend.vue')
