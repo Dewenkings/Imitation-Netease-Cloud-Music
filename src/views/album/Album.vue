@@ -377,7 +377,7 @@ export default {
     color: white;
   }
   .otherInfo {
-    margin: 10px 0 0 -40px;
+    margin: 10px 0 0 -30px;
     display: flex;
     font-size: 12px;
     transform: scale(0.9);
@@ -397,7 +397,7 @@ export default {
     letter-spacing: 0.5px;
   }
   .musicList {
-    // width: calc(100%);
+    width: calc(100%);
     margin-left: 15px;
   }
   .page {
