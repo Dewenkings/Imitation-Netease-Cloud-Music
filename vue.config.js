@@ -26,11 +26,7 @@ if (isProd) {
 }
 
 module.exports = {
-  // 打包之后存放的位置
-  // output: {
-  //   filename: '[name]-bundle.js', // 打包之后的名字 [name]是原先的名字 index-bundle.js
-  //   path: path.resolve(__dirname, 'server/dist')
-  // },
+
   // 输出文件目录
   outputDir: path.resolve(__dirname, 'server/dist'),
   configureWebpack: {
