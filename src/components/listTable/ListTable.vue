@@ -4,10 +4,11 @@
     <div class="listCover">
       <!-- 三元表达式进行查看传入的是否存在封面
         点击专辑页面跳转专辑详情页面中 -->
+        <!-- @click=" officialListDetailItem.songs.length
+        ? clickCheckAll(officialListDetailItem.songs.id) : ''" -->
       <img :src="officialListDetailItem.coverImgUrl || cover"
         alt=""
-        @click=" officialListDetailItem.songs.length
-        ? clickCheckAll(officialListDetailItem.songs.id) : ''"
+        @click="clickCheckAll(officialListDetailItem.id)"
         >
     </div>
     <!-- 专辑歌曲列表的展示 -->

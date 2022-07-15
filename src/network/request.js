@@ -10,6 +10,7 @@ export function request (url, params) {
   const instance = axios.create({
     // baseURL: '/api',
     // timeout: 30000,
+    // 当被监听就启用已有接口进行展示
     baseURL: 'http://124.221.63.19:3000/',
     // baseURL: 'http://localhost:3000/',
     // baseURL: 'https://autumnfish.cn/',
