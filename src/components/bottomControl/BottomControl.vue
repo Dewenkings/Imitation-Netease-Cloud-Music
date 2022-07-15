@@ -466,7 +466,9 @@ export default {
 
     // 点击歌手名跳转至歌手页面的回调
     goToSingerDetail () {
-      if (this.$route.path === `/singerDetail/${this.musicDetail.ar[0].id}`) {
+      console.log(this.musicDetail.ar[0].id)
+      console.log(this.$route.path)
+      if (this.$route.path !== `/singerDetail/${this.musicDetail.ar[0].id}`) {
         this.$router.push({
           name: 'singerDetail',
           params: { id: this.musicDetail.ar[0].id }
