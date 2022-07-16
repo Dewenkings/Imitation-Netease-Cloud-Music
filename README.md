@@ -4,11 +4,11 @@
 
 项目在线体验地址：http://test.dewenking.top/
 
-#### 技术栈
+### 技术栈
 
 ----
 
-##### 前端
+#### 前端
 
 * Vue + Vuex + Vue-Router (核心框架)
 * ElementUI (用于页面搭建)
@@ -16,7 +16,7 @@
 * babel-plugin-syntax-dynamic-import (用于路由分组按需懒加载)
 * nprogress (用于加载过渡)
 
-##### 服务器端
+#### 服务器端
 
 * Node.js (JavaScript运行环境)
 * Express (Web框架)
@@ -24,14 +24,14 @@
 * pm2 (用于后台脚本常驻)
 * nrm (快速切换npm镜像)
 
-#### 功能分析与设计
+### 功能分析与设计
 
 ---
 
-1.  **实现功能：**个性推荐，排行榜展示，视频\MV展示，收藏详情，每日推荐，搜索歌曲\歌手\专辑\歌单，歌手详情，专辑详情，歌单详情，用户详情，播放音乐和下载音乐等等。
+1.  **实现功能：** 个性推荐，排行榜展示，视频\MV展示，收藏详情，每日推荐，搜索歌曲\歌手\专辑\歌单，歌手详情，专辑详情，歌单详情，用户详情，播放音乐和下载音乐等等。
 2.  **组件复用：**  音乐播放器的目的就是播放音乐，其中承载音乐的载体无非是由歌单、专辑、歌手这几块组成。基于网易云音乐APP分析，我们发现：
-   				* 歌单页面、排行榜中的全球榜、首页中歌手
-   				* 
+      * 歌单页面、排行榜中的全球榜、首页中的歌手页面等等采用上下结构：上面为封面图，下面为图的描述；我们构建了ListCard组件，秉持
+      * 歌单详情页面、专辑详情页面等采用左右结构：左边为歌单或专辑封面，
 3. 
 
 2、组件复用 ----观察页面
@@ -40,7 +40,7 @@
 
 4、音乐下载 ---待定
 
-#### 项目启动
+### 项目启动
 
 ---
 
@@ -62,18 +62,22 @@
    npm run serve
    ```
 
-发现音乐
+### 项目效果图
+
+---
+
+#### 发现音乐
 
 <img src=".\src\assets\img\MusicPageShow\discover-recommend.PNG" alt="discover-recommend" style="zoom:33%;" />
 
-视频展示
+#### 视频展示
 
 <img src=".\src\assets\img\MusicPageShow\video-video.PNG" alt="video-video" style="zoom:33%;" />
 
-歌手展示
+#### 歌手展示
 
 <img src=".\src\assets\img\MusicPageShow\singer.PNG" alt="singer" style="zoom:33%;" />
 
-搜索页面
+#### 搜索页面
 
 <img src=".\src\assets\img\MusicPageShow\search.PNG" alt="search" style="zoom:33%;" />
