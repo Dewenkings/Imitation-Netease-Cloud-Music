@@ -52,7 +52,7 @@ export default {
 <style lang="less" scoped>
   .FavoriteSingerContainer {
   display: flex;
-  // justify-content: center;
+  justify-content: center;
   // padding: 0 25px;
   /* height: calc(100vh - 162px); */
   /* height: calc(80vh - 162px); */

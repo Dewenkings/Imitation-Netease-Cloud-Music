@@ -9,6 +9,8 @@ export default {
   name: 'App',
   components: {}
 }
+// 缩放比例
+document.body.style.zoom = 1.25
 </script>
 
 <style>

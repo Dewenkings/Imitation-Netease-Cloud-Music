@@ -9,14 +9,14 @@
           </el-carousel-item>
         </el-carousel>
       </div>
-    </div>
-    <!-- 推荐歌单 -->
-    <div class="recommendMusicList">
-      <h3>推荐歌单<i class="iconfont icon-arrow-right-bold"></i></h3>
-      <list-card
-      :listCardData="musicList"
-      @clickListCardItem="clickToMusicListDetail"
-      ></list-card>
+      <!-- 推荐歌单 -->
+      <div class="recommendMusicList">
+        <h3>推荐歌单<i class="iconfont icon-arrow-right-bold"></i></h3>
+        <list-card
+        :listCardData="musicList"
+        @clickListCardItem="clickToMusicListDetail"
+        ></list-card>
+      </div>
     </div>
   </div>
 </template>
@@ -101,10 +101,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  // .recommendContainer {
-  //   display: flex;
-  //   justify-content: center;
-  // }
+  .recommendContainer {
+    display: flex;
+    justify-content: center;
+  }
   .recommend {
     max-width: 1000px;
   }
