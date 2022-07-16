@@ -3,12 +3,17 @@
     <div class="musicList">
       <router-view></router-view>
     </div>
+     <!-- 返回顶部组件 -->
+    <go-top scrollObj=".musicListContainer"></go-top>
   </div>
 </template>
 
 <script>
+
+import GoTop from 'components/goTop/GoTop.vue'
 export default {
-  name: 'MusicList'
+  name: 'MusicList',
+  components: { GoTop }
 }
 </script>
 

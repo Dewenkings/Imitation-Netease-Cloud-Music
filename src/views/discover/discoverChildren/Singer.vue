@@ -38,16 +38,18 @@
       </div>
 
     </div>
-    <!-- 回到顶部组件---to do -->
+    <!-- 返回顶部组件 -->
+    <go-top scrollObj=".singerContainer"></go-top>
   </div>
 </template>
 
 <script>
 import ListCard from 'components/listCard/ListCard.vue'
 import SecondNavBar from 'components/secondNavBar/SecondNavBar.vue'
+import GoTop from 'components/goTop/GoTop.vue'
 
 export default {
-  components: { ListCard, SecondNavBar },
+  components: { ListCard, SecondNavBar, GoTop },
   name: 'singer',
   data () {
     return {

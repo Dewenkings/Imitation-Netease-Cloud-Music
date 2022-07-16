@@ -51,7 +51,6 @@
         </el-pagination>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -59,6 +58,7 @@
 import SecondNavBar from 'components/secondNavBar/SecondNavBar.vue'
 import ListCard from 'components/listCard/ListCard.vue'
 import SortBox from 'components/sortBox/SortBox.vue'
+
 export default {
   components: {
     SecondNavBar,

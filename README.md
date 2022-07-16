@@ -30,15 +30,12 @@
 
 1.  **实现功能：** 个性推荐，排行榜展示，视频\MV展示，收藏详情，每日推荐，搜索歌曲\歌手\专辑\歌单，歌手详情，专辑详情，歌单详情，用户详情，播放音乐和下载音乐等等。
 2.  **组件复用：**  音乐播放器的目的就是播放音乐，其中承载音乐的载体无非是由歌单、专辑、歌手这几块组成。基于网易云音乐APP分析，我们发现：
-      * 歌单页面、排行榜中的全球榜、首页中的歌手页面等等采用上下结构：上面为封面图，下面为图的描述；我们构建了ListCard组件，秉持
-      * 歌单详情页面、专辑详情页面等采用左右结构：左边为歌单或专辑封面，
-3. 
-
-2、组件复用 ----观察页面
-
-3、数据过多---分页，无限滚动，
-
-4、音乐下载 ---待定
+      * 歌单页面、排行榜中的全球榜、首页中的歌手页面等等采用上下结构：上面为封面图，下面为图的描述；构建ListCard组件，减少同样结构的代码重复编写。
+      * 歌单详情页面、专辑详情页面等采用左右结构：左边为歌单或专辑封面，右边为在该专辑\歌单下的歌曲信息；创建了ListTable组件，后续相应页面直接进行调用。
+      * 视频、MV等页面与歌单页面等类似，都是上下结构，区别在于封面图还展示了播放量与时长；单独创建VideoListCard组件，采用解耦设计，满足不同功能不同组件展示，方便后续维护修改。
+      * 网易云音乐没有回到顶部功能，由于首页歌单、歌手等多个页面内容较多，往下加载较多内容时再回到顶部比较麻烦；创建了GoTop组件，加载内容较多的页面直接复用该组件，实现一键回到顶部功能。
+3.  **数据加载：** 数据量大的由后端设计分页接口，数据加载采用如下两种方式：一种是直接使用Pagination组件进行分页获取数据，可见首页歌单页面；另外一种是通过Infinite Scroll组件进行滚动加载，可见首页歌单页面。
+4.  **搜索功能：** 搜索主要由热搜榜与手动输入查找信息组成：点击热搜榜内容，会跳转到单曲子页面下，歌手\专辑\视频\歌单等导航栏供用户选择；手动输入进行搜索时，会进行搜索推荐，即单曲\歌手\专辑\歌单等内容展示，其中点击单曲将直接进行播放。通过防抖优化搜索，减轻服务器压力。
 
 ### 项目启动
 
@@ -66,18 +63,18 @@
 
 ---
 
-#### 发现音乐
+#### 首页
 
-<img src=".\src\assets\img\MusicPageShow\discover-recommend.PNG" alt="discover-recommend" style="zoom:33%;" />
+<img src=".\src\assets\img\MusicPageShow\discover-recommend.PNG" alt="discover-recommend" style="zoom:50%;" />
 
 #### 视频展示
 
-<img src=".\src\assets\img\MusicPageShow\video-video.PNG" alt="video-video" style="zoom:33%;" />
+<img src=".\src\assets\img\MusicPageShow\video-video.PNG" alt="video-video" style="zoom:50%;" />
 
 #### 歌手展示
 
-<img src=".\src\assets\img\MusicPageShow\singer.PNG" alt="singer" style="zoom:33%;" />
+<img src=".\src\assets\img\MusicPageShow\singer.PNG" alt="singer" style="zoom:50%;" />
 
 #### 搜索页面
 
-<img src=".\src\assets\img\MusicPageShow\search.PNG" alt="search" style="zoom:33%;" />
+<img src=".\src\assets\img\MusicPageShow\search.PNG" alt="search" style="zoom:50%;" />

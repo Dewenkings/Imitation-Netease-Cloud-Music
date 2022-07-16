@@ -190,6 +190,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 .is-active {
   background-color: #f6f6f7;
   font-size: 14px;
@@ -206,6 +207,7 @@ export default {
   margin: 0;
   width: 100%;
   height: calc(81vh - 0px); // -105px 改成 0px,就是那条竖的分割线，延长到底部
+  // overflow: hidden;
 }
 
 .el-header {
