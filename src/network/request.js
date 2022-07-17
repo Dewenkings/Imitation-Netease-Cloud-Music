@@ -8,23 +8,23 @@ import 'nprogress/nprogress.css'
 export function request (url, params) {
   // 请求超过30秒则判定为超时
   const instance = axios.create({
-    baseURL: '/api',
+    // baseURL: '/api',
     // timeout: 30000,
     // 当被监听就启用已有接口进行展示
-    // baseURL: 'http://124.221.63.19:3000/',
+    baseURL: 'http://124.221.63.19:3000/',
     // baseURL: 'http://localhost:3000/',
     // baseURL: 'https://autumnfish.cn/',
-    devServer: {
-      proxy: {
-        '/api': {
-          target: 'http://localhost:3000',
-          changeOrigin: true,
-          pathRewrite: {
-            '/api': ''
-          }
-        }
-      }
-    },
+    // devServer: {
+    //   proxy: {
+    //     '/api': {
+    //       target: 'http://localhost:3000',
+    //       changeOrigin: true,
+    //       pathRewrite: {
+    //         '/api': ''
+    //       }
+    //     }
+    //   }
+    // },
     // http://localhost:8000
     timeout: 30000,
     // 创建实例
