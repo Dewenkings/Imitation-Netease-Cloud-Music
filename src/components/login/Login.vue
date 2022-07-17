@@ -1,6 +1,5 @@
 <template>
   <div class="Login">
-    <div v-if="emailFlag==0">
       <el-form :model="loginForm"  ref="form" label-width="80px" label-position="right" size="mini">
         <el-form-item label="手机号码:" size="mini" label-width="100px" required>
           <input v-model="loginForm.phoneNum"  class="loginInput">
@@ -8,29 +7,11 @@
         <el-form-item label="密码：" size="mini" label-width="100px" required>
           <input type="password" v-model="loginForm.password" class="loginInput" />
         </el-form-item>
+        <div class="loginButton">
+          <el-button type="danger" @click="login" size="mini">登录</el-button>
+        </div>
+        <div class="regEnter" @click="$emit('update:isRegisteredShow',true)">注册</div>
       </el-form>
-    </div>
-    <div v-else>
-      <el-form :model="loginEmailForm"  ref="form" label-width="80px" label-position="right" size="mini">
-        <el-form-item label="邮箱账号:" size="mini" label-width="100px" required>
-          <input v-model="loginEmailForm.email"  class="loginInput">
-        </el-form-item>
-        <el-form-item label="密码：" size="mini" label-width="100px" required>
-          <input type="password" v-model="loginEmailForm.password" class="loginInput" />
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="loginButton">
-        <el-button type="danger" @click="login" size="mini">登录</el-button>
-    </div>
-    <!-- <div class="loginButton">
-        <el-button type="danger" @click="loginByEmail" size="mini">邮箱登录</el-button>
-    </div> -->
-    <div class="otherLogin">
-      <div class="regEnter" @click="$emit('update:isRegisteredShow',true)">注册</div>
-      <div class="regEnter" @click="changeLogin">邮箱登陆</div>
-    </div>
-
   </div>
 </template>
 
@@ -48,23 +29,12 @@ export default {
       loginForm: {
         phoneNum: '',
         password: ''
-      },
-      // 定义一个邮箱登陆方式 --- to do
-      emailFlag: 0,
-      // 邮箱账号
-      loginEmailForm: {
-        email: '',
-        password: ''
       }
     }
   },
   methods: {
     login () {
-      if (!this.emailFlag) {
-        this.loginByPhone()
-      } else {
-        this.loginByEmail()
-      }
+      this.loginByPhone()
     },
     // 手机登陆请求
     async loginByPhone () {
@@ -100,48 +70,10 @@ export default {
       // 清空输入框的内容
       this.loginForm.password = ''
       this.loginForm.phoneNum = ''
-    },
-
-    changeLogin () {
-      this.emailFlag = true
-    },
-    // 邮箱登陆方式
-    async loginByEmail () {
-      const timeStamp = Date.parse(new Date())
-      const result = await this.$request('/login', {
-        email: this.loginForm.email,
-        password: this.loginForm.password,
-        withCredentials: true,
-        time: timeStamp
-      })
-      console.log(result)
-      if (result.data.code === 200) {
-        window.localStorage.setItem('userId', result.data.profile.userId)
-        this.$emit('getUserInfo', result.data.profile)
-
-        this.$message.success('登录成功!')
-        // 修改vuex中的登录状态，flag参数为true
-        this.$store.commit('updataLoginState', true)
-      } else if (result.data.code === 400) {
-        // 手机号错误
-        this.$message.error('邮箱号错误!')
-        return false
-      } else if (result.data.code === 502) {
-        // 密码错误
-        this.$message.error('密码错误!')
-        return false
-      } else {
-        // 登录失败，请稍后重试
-        this.$message.error('登录失败，请稍后重试!')
-        return false
-      }
-
-      // 清空输入框的内容
-      this.loginForm.password = ''
-      this.loginForm.email = ''
     }
   }
 }
+
 </script>
 
 <style lang="less" scoped>

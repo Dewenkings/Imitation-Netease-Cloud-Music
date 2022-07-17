@@ -625,10 +625,10 @@ export default {
         this.getIsSub()
       }
     },
-    // // 监听歌单发生变化musicListId
-    // '$store.state.musicListId' () {
-    //   this.getIsSub()
-    // },
+    // // 监听歌曲发生变化musicId，样式变化
+    '$store.state.musicId' (current, last) {
+      this.handleDOM(current, last)
+    },
     // 监听collectMusicList的变化,进行变化收藏状态
     '$store.state.collectMusicList' (current, last) {
       this.getIsSub()

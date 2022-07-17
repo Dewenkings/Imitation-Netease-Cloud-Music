@@ -172,6 +172,7 @@ export default {
     },
     // 监听收藏歌单的变化
     '$store.state.collectMusicList' (current) {
+      console.log('current', current)
       this.collectedMusicList = current
       // this.getUserMusicList()
     },

@@ -165,8 +165,9 @@ export default {
       this.$store.commit('updataLoginState', false)
       this.$message.success('退出成功!')
       this.isCurrentUser = false
-      // 页面进行跳转---完善
-      // this.userInfo = {}
+      // 页面进行跳转
+      this.$router.push({ name: 'recommend' })
+      this.userInfo = {}
       // console.log(this.userInfo)
     }
   },
@@ -186,7 +187,7 @@ export default {
     // 判断该用户是不是当前登录用户,通过请求参数与存储的进行比较
     if (window.localStorage.getItem('userId')) {
       this.isCurrentUser =
-      window.localStorage.getItem('userId') === this.$route.params.uid
+      window.localStorage.getItem('userId') === this.$route.params.uid.toString()
     }
   }
 }
