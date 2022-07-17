@@ -84,7 +84,6 @@
     </div>
     <div class="right">
       <div class="user">
-
         <div class="avatar">
           <!-- 登录框用login页面--v-if="!userInfo.avatarUrl" -->
           <el-popover placement="bottom" width="330" trigger="click" v-if="!userInfo.avatarUrl">
@@ -308,6 +307,14 @@ export default {
         musicList,
         musicListId: this.$store.state.musicListId
       })
+    }
+  },
+  watch: {
+    '$store.state.isLogin' () {
+      console.log('用户变化')
+      if (this.$store.state.isLogin === false) {
+        this.userInfo = {}
+      }
     }
   }
 }
