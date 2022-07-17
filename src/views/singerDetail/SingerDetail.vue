@@ -187,7 +187,7 @@ export default {
         limit: 20,
         offset: (this.albumPage - 1) * 20
       })
-      console.log('歌手专辑列表', res)
+      // console.log('歌手专辑列表', res)
       this.isAlbumMore = res.data.more
       res = res.data.hotAlbums
       await res.forEach((item) => {
@@ -230,7 +230,7 @@ export default {
         if (parseInt(listId) !== this.$store.state.musicListId) {
           // 将歌单传到vuex
           console.log('歌单变化')
-          console.log('typeof this.singerAlbum[musicListIndex].songs', typeof this.singerAlbum[musicListIndex].songs)
+          // console.log('typeof this.singerAlbum[musicListIndex].songs', typeof this.singerAlbum[musicListIndex].songs)
           this.$store.commit('updateMusicList', {
             musicList: this.singerAlbum[musicListIndex].songs,
             musicListId: parseInt(listId)
@@ -248,6 +248,12 @@ export default {
           })
         }
       }
+    },
+    // 判断用户是否收藏了该歌手
+    getIsSub () {
+      this.isSub = this.$store.state.subSingerList.find(
+        (item) => item.id === this.$route.params.id
+      )
     },
     // 收藏歌手(订阅)
     async subSinger () {
@@ -429,8 +435,11 @@ export default {
     // 点击el-tab-pane的回调
     clickTab (e) {
       console.log(e.index)
-      if (e.index === 1 && this.singerMvInfo.mvs.length === 0) {
+      if (e.index === '1' && this.singerMvInfo.mvs.length === 0) {
         this.getSingerMv()
+      }
+      if (e.index === '3' && this.simiArtistList.length === 0) {
+        this.getSimiArtistInfo()
       }
     }
 
@@ -441,8 +450,8 @@ export default {
   async mounted () {
     await this.getSingerTopSongs()
     await this.getAlbumInfo()
-    await this.getSimiArtistInfo()
-    await this.getSingerMv()
+    // await this.getSimiArtistInfo()
+    // await this.getSingerMv()
     this.$nextTick(() => {
       if (this.$store.state.currentRowInfo.singerId === this.$route.params.id) {
         this.handleViewDOM(
@@ -451,6 +460,12 @@ export default {
         )
       }
     })
+    if (this.$store.state.isLogin) {
+      if (this.$store.state.subSingerList == null) {
+        await this.getSubSingerList()
+      }
+      this.getIsSub()
+    }
   },
   watch: {
     singerAlbum () {

@@ -323,8 +323,8 @@ export default {
 .musicDetailCard {
   position: fixed;
   width: 100%;
-  height: calc(100vh - 50px);
-  // height: calc(80vh - 55px);
+  // height: calc(100vh - 50px);
+  height: calc(90vh - 45px);
   bottom: 55px;
   left: 0;
   z-index: 1000;

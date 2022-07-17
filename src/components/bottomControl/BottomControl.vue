@@ -18,11 +18,12 @@
           v-if="musicDetail.al"
           :draggable="false"
         />
+        <img :src="musicDetail.imageUrl" v-if="musicDetail.imageUrl" alt="" class="avatar-banner">
         <img src="~assets/img/test.jpg" alt="" v-else :draggable="false" />
       </div>
       <div class="musicInfo">
         <div class="musicName" v-if="musicDetail && musicDetail.name">
-          {{ musicDetail.name }}
+          {{ musicDetail.name}}
         </div>
         <div
           class="singer"
@@ -249,19 +250,29 @@ export default {
       //     this.duration = this.musicList[index].dt;
       //   }
       // });
-
+      // 对于轮播图单曲id为targetId
       const index = this.musicList.findIndex(
-        (item) => item.id === this.$store.state.musicId
+        (item) => {
+          if (item.targetId) {
+            // console.log('轮播图进入')
+            return item.targetId.toString() === this.$store.state.musicId.toString()
+          }
+          return item.id === this.$store.state.musicId
+        }
       )
-
+      console.log(index)
       if (index !== -1) {
         // 记录当前音乐的index
+        // console.log('在歌单/专辑中')
         this.currentMusicIndex = index
         // 将索引传至vuex
         this.$store.commit('updateCurrentIndex', index)
         this.musicDetail = this.musicList[index]
         // 直接从audio标签中的duration属性拿时长会有请求时差问题，所以直接在musicInfo中拿
         this.duration = this.musicList[index].dt
+      } else { // 可删
+        console.log('不在歌单/专辑中')
+        console.log('this.musicList', this.musicList)
       }
     },
     // 切歌函数
@@ -415,7 +426,7 @@ export default {
     },
     // 用户点击喜欢该音乐的回调
     async likeIt () {
-      if (!window.localStorage.getItem('userInfo')) {
+      if (!window.localStorage.getItem('userId')) { // 保存userId
         this.$message.error('请先登录!')
         return
       }
@@ -479,7 +490,9 @@ export default {
       }
     }
   },
-
+  created () {
+    this.getLikeMusicList()
+  },
   watch: {
     // 监听vuex中musicId的变化
     '$store.state.musicId' (id) {
@@ -516,6 +529,7 @@ export default {
         this.likeMuiscList = []
       }
     }
+
   },
   filters: {
     handleMusicTime
@@ -552,6 +566,11 @@ export default {
   width: 100%;
 }
 
+.avatar-banner {
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+}
 .left {
   display: flex;
   align-items: center;

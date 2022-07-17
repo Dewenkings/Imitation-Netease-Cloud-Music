@@ -171,9 +171,10 @@ export default {
         })
     },
     // 监听收藏歌单的变化
-    // '$store.state.collectMusicList' (current) {
-    //   this.collectedMusicList = current
-    // },
+    '$store.state.collectMusicList' (current) {
+      this.collectedMusicList = current
+      // this.getUserMusicList()
+    },
     // 监听vuex中的登录状态
     '$store.state.isLogin' (current) {
       console.log('登录状态', current)
@@ -206,7 +207,7 @@ export default {
   padding: 0 15px;
   margin: 0;
   width: 100%;
-  height: calc(81vh - 0px); // -105px 改成 0px,就是那条竖的分割线，延长到底部
+  height: calc(81vh - 0px); // -105px 改成 0px,就是那条竖的分割线，延长到底部81vh - 0px
   // overflow: hidden;
 }
 

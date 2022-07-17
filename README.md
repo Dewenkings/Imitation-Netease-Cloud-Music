@@ -1,6 +1,6 @@
 # Imitation-Netease-Cloud-Music
 
-该项目主要实现了网易云页面基本功能，比如个性推荐，视频展示，歌手界面显示，搜索歌曲，播放音乐和下载音乐等等。后端接口文档由公开项目[网易云音乐 NodeJS 版 API (neteasecloudmusicapi.vercel.app)](https://neteasecloudmusicapi.vercel.app/#/)提供，十分感谢!
+该项目主要实现了网易云页面基本功能，比如个性推荐，视频展示，歌手界面显示，搜索歌曲，播放音乐和下载音乐等等。后端接口文档由公开项目[[NeteaseCloudMusicApi](https://neteasecloudmusicapi.js.org/#/?id=neteasecloudmusicapi)](https://neteasecloudmusicapi.vercel.app/#/)提供，十分感谢!
 
 项目在线体验地址：http://test.dewenking.top/
 

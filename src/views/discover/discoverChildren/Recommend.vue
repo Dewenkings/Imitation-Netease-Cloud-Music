@@ -50,6 +50,7 @@ export default {
     // 点击轮播图跳转具体页面--- to do
     TurnToPage (item) {
       // 专辑
+      console.log('item--', item)
       const type = item.targetType
       const id = item.targetId
       console.log('type', typeof id)
@@ -66,24 +67,29 @@ export default {
       } else if (type === 1) {
         console.log('song') // 单曲
         // 可以播放，当时存在底部播放按钮左侧没有变化
+        // this.$store.commit('updateMusicId', id.toString())
+        const musicList = this.$store.state.musicList
+        const currentIndex = this.$store.state.currentIndex
+        // 先判断该歌曲是否已经在歌单中存在，避免重复点击导致歌单出现相同歌曲
+        console.log(id.toString())
+        const isExist = musicList.find((item) => {
+          return item.id === id.toString()
+        })
+        console.log('isExist', isExist)
+        if (isExist) {
+        // 如果已经存在 则只提交歌曲id并return出去
+          this.$store.commit('updateMusicId', id.toString())
+          return false
+        }
+        this.$store.commit('changePlayState', false)
+        // 将请求到的歌曲详情插入到歌单对应位置并提交至vuex
+        musicList.splice(currentIndex + 1, 0, item)
+
         this.$store.commit('updateMusicId', id.toString())
-        // const musicList = this.$store.state.musicList
-        // const currentIndex = this.$store.state.currentIndex
-        // // 先判断该歌曲是否已经在歌单中存在，避免重复点击导致歌单出现相同歌曲
-        // const isExist = musicList.find((item) => item.id === id)
-        // if (isExist) {
-        // // 如果已经存在 则只提交歌曲id并return出去
-        //   this.$store.commit('updateMusicId', id)
-        //   return false
-        // }
-        // this.$store.commit('changePlayState', false)
-        // // 将请求到的歌曲详情插入到歌单对应位置并提交至vuex
-        // musicList.splice(currentIndex + 1, 0, item)
-        // this.$store.commit('updateMusicId', id)
-        // this.$store.commit('updateMusicList', {
-        //   musicList,
-        //   musicListId: this.$store.state.musicListId
-        // })
+        this.$store.commit('updateMusicList', {
+          musicList,
+          musicListId: this.$store.state.musicListId
+        })
       }
     },
     // 点击跳转歌单详情页面

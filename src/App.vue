@@ -10,7 +10,7 @@ export default {
   components: {}
 }
 // 缩放比例
-// document.body.style.zoom = 1.25
+document.body.style.zoom = 1.10
 </script>
 
 <style>

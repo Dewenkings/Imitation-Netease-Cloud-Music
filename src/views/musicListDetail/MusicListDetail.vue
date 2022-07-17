@@ -345,12 +345,13 @@ export default {
     // 请求用户歌单
     async getUserMusicList () {
       const timestamp = Date.parse(new Date())
-      // 先从localStorage里面读取用户信息  如果登录成功是有存的
-      this.userInfo =
-        window.localStorage.getItem('userInfo') &&
-        JSON.parse(window.localStorage.getItem('userInfo'))
+      // 一开始想存储所有用户信息  如果登录成功是有存的
+      // 但是转念一想没必要，只要有userId就行了
+      // this.userInfo =
+      //   window.localStorage.getItem('userInfo') &&
+      //   JSON.parse(window.localStorage.getItem('userInfo'))
       let res = await this.$request('/user/playlist', {
-        uid: this.userInfo.userId,
+        uid: window.localStorage.getItem('userId'),
         timestamp
       })
       res = res.data.playlist
@@ -358,6 +359,8 @@ export default {
       this.collectedMusicList = res.slice(index)
       // 将收藏的歌单上传至vuex
       this.$store.commit('updateCollectMusicList', this.collectedMusicList)
+      // 得实现收藏就更新，且收藏按钮变红--watch实现
+      // 点击其余歌单得有显示
     },
 
     // 获取歌单收藏者
@@ -394,6 +397,8 @@ export default {
           musicListId: this.musicListDetail.id
         })
       }
+      // 判断歌曲是否为已喜欢
+      // this.getIsSub()
     },
     // 点击播放全部按钮的回调
     playAll () {
@@ -459,9 +464,10 @@ export default {
     clickTab (e) {
       console.log(e.index)
       console.log(e)
-      if (e.index === 1 && !this.comments.comments) {
+      console.log(this.followedsListData.isLoaded)
+      if (e.index === '1' && !this.comments.comments) {
         this.getMusicListComment()
-      } else if (e.index === 2 && !this.followedsListData.isLoaded) {
+      } else if (e.index === '2' && !this.followedsListData.isLoaded) {
         this.getMusicListFolloweds()
         this.followedsListData.isLoaded = true
       }
@@ -493,24 +499,29 @@ export default {
     // 判断用户是否收藏了该歌单
     getIsSub () {
       this.isSub = this.$store.state.collectMusicList.find(
-        (item) => item.id === this.$route.params.id
+        (item) => item.id.toString() === this.$route.params.id.toString()
       )
       console.log('收藏：', this.isSub)
       // 查找用户歌单是否有当前歌单
+      // console.log('歌单', this.$route.params.id.toString())
       // const index = this.$store.state.collectMusicList.findIndex(
-      //   (item) => item.id === this.$route.params.id)
+      //   (item) => {
+      //     console.log(item.id)
+      //     return item.id.toString() === this.$route.params.id
+      //   })
+      // console.log('index', index)
       // if (index === -1) {
       //   // 如果没有 返回false
-      //   this.isSub = true
+      //   this.isSub = false
       // } else {
       //   // 否则返回true
-      //   this.isSub = false
+      //   this.isSub = true
       // }
     },
     // 判断是否是用户创建的歌单
     getIsCreated () {
       this.isCreated = this.$store.state.createdMusicList.find(
-        (item) => item.id === this.$route.params.id
+        (item) => item.id.toString() === this.$route.params.id.toString()
       )
     //   console.log('this.$route.params.id', this.$route.params.id)
     //   console.log('createdMusicList.id', this.$store.state.createdMusicList)
@@ -527,7 +538,7 @@ export default {
     // 点击收藏按钮的回调
     async collectList () {
       if (!this.$store.state.isLogin) {
-        // this.$message.error("请先进行登录操作!");
+        this.$message.error('请先进行登录操作!')
         return
       }
       this.isSub = !this.isSub
@@ -606,9 +617,6 @@ export default {
     //   console.log(currentIndex, lastIndex);
     //   // this.handleTableDOM(currentIndex, lastIndex);
     // },
-    '$store.state.musicId' (current, last) {
-      this.handleDOM(current, last)
-    },
     // 监听createdMusicList的变化
     '$store.state.createdMusicList' (current, last) {
       // 如果在收藏页面刷新，收藏歌单还没获取到，但是收藏按钮已经渲染了，所以在第一次获取到数据时，再渲染一次
@@ -616,6 +624,14 @@ export default {
       if (last.length === 0) {
         this.getIsSub()
       }
+    },
+    // // 监听歌单发生变化musicListId
+    // '$store.state.musicListId' () {
+    //   this.getIsSub()
+    // },
+    // 监听collectMusicList的变化,进行变化收藏状态
+    '$store.state.collectMusicList' (current, last) {
+      this.getIsSub()
     }
   },
   filters: {
@@ -629,8 +645,8 @@ export default {
     handleNum
   },
   created () {
-    this.getMusicListFolloweds()
-    this.getMusicListComment()
+    // this.getMusicListFolloweds()
+    // this.getMusicListComment()
   },
   async mounted () {
     if (this.$store.state.isLogin) {
