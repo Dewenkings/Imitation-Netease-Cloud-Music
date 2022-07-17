@@ -44,11 +44,17 @@ const state = {
   },
   // 已喜欢的视频
   likeVideoList: null
+  // // 将userId存储在vuex中
+  // userId: ''
 }
 
 export default new Vuex.Store({
   state,
   mutations: {
+    // // 更新userId
+    // updateUserId (state, userId) {
+    //   state.userId = userId
+    // },
     // 更新音乐url
     updateMusicId (state, musicId) {
       state.musicId = musicId

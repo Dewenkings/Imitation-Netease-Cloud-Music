@@ -45,8 +45,9 @@ export default {
         withCredentials: true,
         time: timeStamp
       })
-      console.log(result)
+      console.log('登陆接口', result)
       if (result.data.code === 200) {
+        // 由于接口原因,请求时还是用的别人登陆的接口
         window.localStorage.setItem('userId', result.data.profile.userId)
         this.$emit('getUserInfo', result.data.profile)
 
