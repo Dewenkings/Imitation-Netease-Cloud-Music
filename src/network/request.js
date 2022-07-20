@@ -14,13 +14,14 @@ export function request (url, params) {
     baseURL: 'http://124.221.63.19:3000/',
     // baseURL: 'http://localhost:3000/',
     // baseURL: 'https://autumnfish.cn/',
+    // changeOrigin: true,
     // devServer: {
     //   proxy: {
     //     '/api': {
-    //       target: 'http://localhost:3000',
+    //       target: 'https://autumnfish.cn/',
     //       changeOrigin: true,
     //       pathRewrite: {
-    //         '/api': ''
+    //         '/api': '/'
     //       }
     //     }
     //   }
