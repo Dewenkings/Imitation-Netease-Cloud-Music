@@ -2,6 +2,9 @@ const isProd = process.env.NODE_ENV === 'production'
 let externals = {}
 let cdn = { css: [], js: [] }
 
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
+
 var path = require('path')
 
 if (isProd) {
@@ -40,7 +43,18 @@ module.exports = {
         plugins: '@/plugins'
       }
     },
-    externals: externals
+    externals: externals,
+    // 开启gzip
+    plugins: [
+      new CompressionWebpackPlugin({
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'), // 匹配文件名
+        threshold: 10240, // 对10K以上的数据进行压缩
+        minRatio: 0.8,
+        deleteOriginalAssets: false // 是否删除源文件
+      })
+    ]
   },
   // 自定义打包
   chainWebpack: config => {

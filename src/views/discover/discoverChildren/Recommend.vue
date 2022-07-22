@@ -4,8 +4,8 @@
     <div class="recommend">
       <div class="carousel">
         <el-carousel :interval="4000" type="card" height="180px">
-          <el-carousel-item v-for="(item, index ) in bannerData" :key="index" @click.native="TurnToPage(item)">
-            <img :src="item.imageUrl" alt="">
+          <el-carousel-item v-for="(item, index ) in bannerData" :key="index">
+            <img :src="item.imageUrl" @click="TurnToPage(item)" alt="">
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -29,7 +29,8 @@ export default {
   data () {
     return {
       bannerData: '',
-      musicList: []
+      musicList: [],
+      songDetail: {}
     }
   },
   methods: {
@@ -47,6 +48,12 @@ export default {
         this.musicList = res.data.result
       })
     },
+    // 获取歌单详情
+    // getMusicDetail (id) {
+    //   this.songDetail = this.$request('/playlist/detail', { id, timestamp: Date.parse(new Date()) }).then(
+    //     res => res.data
+    //   )
+    // },
     // 点击轮播图跳转具体页面--- to do
     TurnToPage (item) {
       // 专辑
@@ -66,6 +73,13 @@ export default {
         this.$router.push({ name: 'singerDetail', params: { id: id } })
       } else if (type === 1) {
         console.log('song') // 单曲
+        // ----------------------------
+        // // this.getMusicDetail(id)
+        // this.songDetail = this.$request('/playlist/detail', { id: item.targetId, timestamp: Date.parse(new Date()) }).then(
+        //   res => res.data
+        // )
+        // -------------------------
+        // console.log('item-edit', this.songDetail)
         // 可以播放，当时存在底部播放按钮左侧没有变化
         // this.$store.commit('updateMusicId', id.toString())
         const musicList = this.$store.state.musicList
@@ -85,7 +99,7 @@ export default {
         // 将请求到的歌曲详情插入到歌单对应位置并提交至vuex
         musicList.splice(currentIndex + 1, 0, item)
 
-        this.$store.commit('updateMusicId', id.toString())
+        this.$store.commit('updateMusicId', id)
         this.$store.commit('updateMusicList', {
           musicList,
           musicListId: this.$store.state.musicListId

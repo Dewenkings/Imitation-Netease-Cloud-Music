@@ -11,12 +11,12 @@ const Discover = () => import('views/discover/Discover.vue')
 // }
 
 // 首页-发现音乐
-const Recommend = () => import(/* webpackChunkName: "discover_recommend_musiclist" */ '../views/discover/discoverChildren/Recommend.vue')
-const MusicList = () => import(/* webpackChunkName: "discover_recommend_musiclist" */ 'views/discover/discoverChildren/MusicList.vue')
-const MusicListIndex = () => import(/* webpackChunkName: "discover_recommend_musiclist" */ 'views/discover/discoverChildren/musicListChildren/MusicListIndex.vue')
-const MusicListHighquality = () => import(/* webpackChunkName: "discover_recommend_musiclist" */ 'views/discover/discoverChildren/musicListChildren/MusicListHighquality.vue')
-const Singer = () => import(/* webpackChunkName: "discover_singer_ranking" */ '../views/discover/discoverChildren/Singer.vue')
-const Ranking = () => import(/* webpackChunkName: "discover_singer_ranking" */ '../views/discover/discoverChildren/Ranking.vue')
+const Recommend = () => import('../views/discover/discoverChildren/Recommend.vue')
+const MusicList = () => import(/* webpackChunkName: "discover_musiclist" */ 'views/discover/discoverChildren/MusicList.vue')
+const MusicListIndex = () => import(/* webpackChunkName: "discover_musiclist" */ 'views/discover/discoverChildren/musicListChildren/MusicListIndex.vue')
+const MusicListHighquality = () => import(/* webpackChunkName: "discover_musiclist" */ 'views/discover/discoverChildren/musicListChildren/MusicListHighquality.vue')
+const Singer = () => import('../views/discover/discoverChildren/Singer.vue')
+const Ranking = () => import('../views/discover/discoverChildren/Ranking.vue')
 // 首页-视频
 const Video = () => import(/* webpackChunkName: "video_video_mv" */ 'views/video/Video.vue')
 const VideoList = () => import(/* webpackChunkName: "video_video_mv" */ 'views/video/videoChildren/VideoList.vue')
