@@ -21,7 +21,7 @@ export function request (url, params) {
     //       target: 'https://autumnfish.cn/',
     //       changeOrigin: true,
     //       pathRewrite: {
-    //         '/api': '/'
+    //         '^/api': ''
     //       }
     //     }
     //   }

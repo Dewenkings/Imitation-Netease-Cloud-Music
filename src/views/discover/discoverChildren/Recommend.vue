@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    async getBannerDate () {
+    async getBannerData () {
       const res = await this.$request('/banner', {
         type: 0
       })
@@ -114,7 +114,7 @@ export default {
     }
   },
   async created () {
-    this.getBannerDate()
+    this.getBannerData()
     this.getMusicList()
   }
 }
@@ -140,6 +140,8 @@ export default {
   }
 
   .el-carousel__item img {
+    // width: 486px;
+    // height: 180px;
     height: 100%;
   }
   .recommendMusicList {

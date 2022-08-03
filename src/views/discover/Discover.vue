@@ -44,7 +44,7 @@ export default {
   margin: auto;
   overflow: scroll;
   /* 不设置就滚动不了 */
-  height: calc(75vh - 25px); /* 80 -- 75 */
+  height: calc(70vh - 25px);
   padding: 0 15px;
 }
 </style>

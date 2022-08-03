@@ -214,7 +214,10 @@ export default {
         uid: window.localStorage.getItem('userId'),
         timestamp
       })
-      this.likeMuiscList = res.data.ids
+      // 先判断
+      if (res.data.ids) {
+        this.likeMuiscList = res.data.ids
+      }
       // 将喜欢列表提交到vuex 供歌单中显示喜欢使用 （因为性能问题暂时没做）
       this.$store.commit('updataLikeMuiscList', this.likeMuiscList)
     },
