@@ -2,7 +2,7 @@
 
 该项目主要实现了网易云页面基本功能，比如个性推荐，视频展示，歌手界面显示，搜索歌曲，播放音乐和下载音乐等等。后端接口文档由公开项目[[NeteaseCloudMusicApi](https://neteasecloudmusicapi.js.org/#/?id=neteasecloudmusicapi)](https://neteasecloudmusicapi.vercel.app/#/) 提供，十分感谢!
 
-项目在线体验地址：http://lucky.dewenking.top/
+项目在线体验地址：http://lucky.dewenking.top/ (已停用)
 
 **tip：**  当时写的时候没有考虑pc尺寸问题，若是大屏，可能需要调节下页面比例缩放。
 
