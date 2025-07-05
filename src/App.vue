@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app min-h-screen">
     <router-view></router-view>
   </div>
 </template>
@@ -10,7 +10,7 @@ export default {
   components: {}
 }
 // 缩放比例
-document.body.style.zoom = 1.10
+// document.body.style.zoom = 1.10
 </script>
 
 <style>
