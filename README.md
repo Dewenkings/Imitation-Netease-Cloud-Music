@@ -1,15 +1,13 @@
 # Imitation-Netease-Cloud-Music
 
-----
-更新于2025/7/5：
-
-近期发现原有后端接口文档已无法访问，接口请求返回502。经查，相关API已迁移为npm包形式，因此本项目已针对数据获取方式进行了相应调整，现后端通过直接调用npm包实现网易云音乐API代理。
-
-----
-
 该项目主要实现了网易云页面基本功能，比如个性推荐，视频展示，歌手界面显示，搜索歌曲，播放音乐和下载音乐等等。后端接口文档由公开项目[[NeteaseCloudMusicApi](https://neteasecloudmusicapi.js.org/#/?id=neteasecloudmusicapi)](https://neteasecloudmusicapi.vercel.app/#/) 提供，十分感谢!
 
 项目在线体验地址：http://lucky.dewenking.top/ (已停用)
+
+---- 
+更新于2025/7/5：
+
+近期发现原有后端接口文档已无法访问，接口请求返回502。经查，相关API已迁移为npm包形式，因此本项目已针对数据获取方式进行了相应调整，现后端通过直接调用npm包实现网易云音乐API代理。
 
 ### 技术栈
 
