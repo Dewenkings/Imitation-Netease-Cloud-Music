@@ -6,7 +6,16 @@
     "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
     "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "imgzip": "imgzip"
+    "imgzip": "imgzip",
+    "deploy:dev": "./scripts/deploy.sh dev",
+    "deploy:prod": "./scripts/deploy.sh prod",
+    "server:dev": "cd server && NODE_ENV=development PORT=3001 node app.js",
+    "server:prod": "cd server && NODE_ENV=production PORT=3000 node app.js",
+    "pm2:start": "pm2 start pm2.config.js",
+    "pm2:stop": "pm2 stop netease-music",
+    "pm2:restart": "pm2 restart netease-music",
+    "pm2:logs": "pm2 logs netease-music",
+    "pm2:status": "pm2 status"
   },
   "dependencies": {
     "axios": "^0.21.1",

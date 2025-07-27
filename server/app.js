@@ -1,11 +1,22 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const path = require('path')
+const history = require('connect-history-api-fallback')
 const NeteaseApi = require('NeteaseCloudMusicApi')
 
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
+
+// 配置静态文件服务和 History API fallback
+const staticFileMiddleware = express.static(path.join(__dirname, 'dist'))
+app.use(staticFileMiddleware)
+app.use(history({
+  disableDotRule: true,
+  verbose: true
+}))
+app.use(staticFileMiddleware)
 
 // ==================== 用户认证相关接口 ====================
 
