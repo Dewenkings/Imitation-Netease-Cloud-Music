@@ -5,6 +5,16 @@ on:
     branches: [ main, master ]
   release:
     types: [ published ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: false
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
 
 jobs:
   deploy:
