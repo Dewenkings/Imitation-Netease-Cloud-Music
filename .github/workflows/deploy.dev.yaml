@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflow/deploy.yaml
+    uses: ./.github/workflows/deploy.yaml@main
     with:
       MODE: 'development'
       PORT: 3001
