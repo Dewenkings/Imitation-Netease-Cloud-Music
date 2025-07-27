@@ -61,7 +61,7 @@ jobs:
       uses: appleboy/ssh-action@v0.1.5
       with:
         host: ${{ inputs.REMOTE_HOST }}
-        username: ubuntu
+        username: root
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         port: 22
         script: |
@@ -70,12 +70,11 @@ jobs:
           pm2 delete ${{ inputs.NAME }} || true
           
           # 创建应用目录
-          sudo mkdir -p /var/www/${{ inputs.NAME }}
-          sudo chown ubuntu:ubuntu /var/www/${{ inputs.NAME }}
+          mkdir -p /var/www/${{ inputs.NAME }}
           
           # 备份当前版本
           if [ -d "/var/www/${{ inputs.NAME }}/current" ]; then
-            sudo mv /var/www/${{ inputs.NAME }}/current /var/www/${{ inputs.NAME }}/backup-$(date +%Y%m%d-%H%M%S)
+            mv /var/www/${{ inputs.NAME }}/current /var/www/${{ inputs.NAME }}/backup-$(date +%Y%m%d-%H%M%S)
           fi
           
           # 创建新版本目录
@@ -85,7 +84,7 @@ jobs:
       uses: appleboy/scp-action@v0.1.4
       with:
         host: ${{ inputs.REMOTE_HOST }}
-        username: ubuntu
+        username: root
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         port: 22
         source: "deploy/*"
@@ -96,7 +95,7 @@ jobs:
       uses: appleboy/ssh-action@v0.1.5
       with:
         host: ${{ inputs.REMOTE_HOST }}
-        username: ubuntu
+        username: root
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         port: 22
         script: |
