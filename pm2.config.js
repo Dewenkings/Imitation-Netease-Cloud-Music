@@ -4,7 +4,7 @@ module.exports = {
       name: process.env.NAME || 'netease-music',
       exec_mode: 'cluster',
       instances: process.env.INSTANCES || 1,
-      script: './server/app.js',
+      script: './app.js',
       cwd: './',
       env: {
         NODE_ENV: process.env.NODE_ENV || 'production',
