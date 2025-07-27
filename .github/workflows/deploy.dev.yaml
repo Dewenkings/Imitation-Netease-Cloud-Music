@@ -25,5 +25,4 @@ jobs:
       REMOTE_HOST: 8.159.133.190
       NAME: 'netease-music-dev'
       INSTANCES: 1
-    secrets:
-      SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+    secrets: inherit
