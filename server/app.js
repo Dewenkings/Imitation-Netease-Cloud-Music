@@ -700,7 +700,7 @@ app.use((err, req, res, next) => {
 // ==================== 启动服务器 ====================
 
 const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log('🎵 网易云音乐API代理服务器已启动')
   console.log(`📍 服务地址: http://localhost:${PORT}`)
   console.log('📡 API前缀: /api')
