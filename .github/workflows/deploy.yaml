@@ -12,6 +12,10 @@ on:
       REMOTE_HOST:
         required: true
         type: string
+      REMOTE_USER_NAME:
+        required: false
+        type: string
+        default: 'root'
       NAME:
         required: true
         type: string
@@ -61,7 +65,7 @@ jobs:
       uses: appleboy/ssh-action@v0.1.5
       with:
         host: ${{ inputs.REMOTE_HOST }}
-        username: root
+        username: ${{ inputs.REMOTE_USER_NAME }}
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         port: 22
         timeout: 30s
@@ -91,7 +95,7 @@ jobs:
       uses: appleboy/scp-action@v0.1.4
       with:
         host: ${{ inputs.REMOTE_HOST }}
-        username: root
+        username: ${{ inputs.REMOTE_USER_NAME }}
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         port: 22
         timeout: 30s
@@ -104,7 +108,7 @@ jobs:
       uses: appleboy/ssh-action@v0.1.5
       with:
         host: ${{ inputs.REMOTE_HOST }}
-        username: root
+        username: ${{ inputs.REMOTE_USER_NAME }}
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         port: 22
         timeout: 30s

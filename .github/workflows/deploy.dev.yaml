@@ -22,7 +22,8 @@ jobs:
     with:
       MODE: 'development'
       PORT: 3001
-      REMOTE_HOST: 8.159.133.190
+      REMOTE_HOST: ${{ vars.SSH_HOST_DEV }}
+      REMOTE_USER_NAME: ${{ vars.SSH_USER_NAME_DEV || 'root' }}
       NAME: 'netease-music-dev'
       INSTANCES: 1
     secrets: inherit

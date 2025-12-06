@@ -22,7 +22,8 @@ jobs:
     with:
       MODE: 'production'
       PORT: 3000
-      REMOTE_HOST: 8.159.133.190
+      REMOTE_HOST: ${{ vars.SSH_HOST_PROD }}
+      REMOTE_USER_NAME: ${{ vars.SSH_USER_NAME_PROD || 'root' }}
       NAME: 'netease-music-prod'
       INSTANCES: 2
     secrets: inherit
