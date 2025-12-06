@@ -6,9 +6,15 @@ import nProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 // 该项目所有请求均为 get请求
 export function request (url, params) {
+  // 根据环境自动选择 API 地址
+  // 开发环境：使用 localhost:3001
+  // 生产环境：使用相对路径 /api（与前端同域）
+  const baseURL = process.env.NODE_ENV === 'production'
+    ? '/api'
+    : 'http://localhost:3001/api'
   // 请求超过30秒则判定为超时
   const instance = axios.create({
-    baseURL: 'http://localhost:3001/api', // 你的自定义后端
+    baseURL: baseURL,
     timeout: 30000
     // withCredentials: true
   })

@@ -64,6 +64,9 @@ jobs:
         username: root
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         port: 22
+        timeout: 30s
+        command_timeout: 10m
+        debug: true
         script: |
           # 停止现有服务
           pm2 stop ${{ inputs.NAME }} || true
@@ -91,6 +94,8 @@ jobs:
         username: root
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         port: 22
+        timeout: 30s
+        debug: true
         source: "deploy/*"
         target: "/var/www/${{ inputs.NAME }}/current/"
         strip_components: 1
@@ -102,6 +107,9 @@ jobs:
         username: root
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         port: 22
+        timeout: 30s
+        command_timeout: 10m
+        debug: true
         script: |
           cd /var/www/${{ inputs.NAME }}/current
           
