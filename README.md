@@ -10,6 +10,15 @@
 
 近期发现原有后端接口文档已无法访问，接口请求返回502。经查，相关API已迁移为npm包形式，因此本项目已针对数据获取方式进行了相应调整，现后端通过直接调用npm包实现网易云音乐API代理。
 
+----
+更新2026/1/10：
+## 🚀 在线演示 (Live Demo)
+
+- **预览地址**: [https://lucky-music.top:8443](https://lucky-music.top:8443)
+- **部署架构**: Ubuntu Server + Nginx (Native) + SSL
+- **环境说明**: 
+  > 本项目部署于 **Ubuntu Linux** 生产环境。鉴于国内服务器的 ICP 备案合规策略，特别采用了 **Nginx 非标准端口 (8443)** 配合 **Let's Encrypt (DNS-01 Challenge)** 方案，实现了全链路 HTTPS 安全访问，绕过常规端口阻断。
+
 ### 技术栈
 
 ----
@@ -92,4 +101,5 @@
 #### 搜索页面
 
 <img src=".\src\assets\img\MusicPageShow\search.PNG" alt="search" style="zoom:50%;" />
+
 
